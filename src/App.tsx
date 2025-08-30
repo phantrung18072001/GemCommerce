@@ -1,9 +1,18 @@
-import { InputNumber, RadioGroup } from "./components";
+import { useState } from 'react';
+import { InputNumber, RadioGroup } from './components';
+
+const UNIT = {
+  PERCENTAGE: 'PERCENTAGE',
+  PIXEL: 'PIXEL',
+};
 
 const App = () => {
+  const [unit, setUnit] = useState(UNIT.PERCENTAGE);
+  const [value, setValue] = useState(0);
+
   const options = [
-    { label: "%", value: "PERCENTAGE" },
-    { label: "px", value: "PIXEL" },
+    { label: '%', value: UNIT.PERCENTAGE },
+    { label: 'px', value: UNIT.PIXEL },
   ];
 
   return (
@@ -14,10 +23,10 @@ const App = () => {
             <div className="text-sm w-25 text-[#AAAAAA]">Unit</div>
             <RadioGroup
               options={options}
-              defaultValue={"PERCENTAGE"}
+              defaultValue={unit}
               className="h-9 w-35"
               onChange={(value) => {
-                console.log(value);
+                setUnit(value);
               }}
             />
           </div>
@@ -25,8 +34,11 @@ const App = () => {
             <div className="text-sm w-25 text-[#AAAAAA]">Value</div>
             <InputNumber
               className="h-9 w-35"
+              min={0}
+              value={unit === UNIT.PERCENTAGE && value > 100 ? 100 : value}
+              {...(unit === UNIT.PERCENTAGE ? { max: 100 } : {})}
               onChange={(value) => {
-                console.log(value);
+                setValue(value);
               }}
             />
           </div>
