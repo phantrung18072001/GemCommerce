@@ -22,6 +22,7 @@ const App = () => {
           <div className="flex gap-2 items-center ">
             <div className="text-sm w-25 text-[#AAAAAA]">Unit</div>
             <RadioGroup
+              name="unit"
               options={options}
               defaultValue={unit}
               className="h-9 w-35"
@@ -36,7 +37,7 @@ const App = () => {
               className="h-9 w-35"
               min={0}
               value={unit === UNIT.PERCENTAGE && value > 100 ? 100 : value}
-              {...(unit === UNIT.PERCENTAGE ? { max: 100 } : {})}
+              max={unit === UNIT.PERCENTAGE ? 100 : undefined}
               onChange={(value) => {
                 setValue(value);
               }}

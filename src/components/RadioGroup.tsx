@@ -1,7 +1,8 @@
-import { useState } from "react";
-import RadioButton from "./RadioButton";
+import { useState } from 'react';
+import RadioButton from './RadioButton';
 
 interface RadioGroupProps {
+  name: string;
   value?: string;
   defaultValue?: string;
   className?: string;
@@ -11,6 +12,7 @@ interface RadioGroupProps {
 
 const RadioGroup: React.FC<RadioGroupProps> = ({
   options,
+  name,
   defaultValue,
   className,
   onChange,
@@ -22,6 +24,7 @@ const RadioGroup: React.FC<RadioGroupProps> = ({
       {options.map((option) => (
         <RadioButton
           key={option.value}
+          name={name}
           value={option.value}
           label={option.label}
           checked={selected === option.value}

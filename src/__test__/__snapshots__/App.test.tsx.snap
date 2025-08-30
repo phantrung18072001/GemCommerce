@@ -1,15 +1,101 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`toUpperCase 1`] = `
-<DocumentFragment>
+exports[`App Component > renders correctly 1`] = `
+<div>
   <div
     class="w-screen h-screen bg-neutral-950 flex items-center justify-center text-neutral-100"
   >
     <div
-      class="w-96 bg-neutral-800 p-4 rounded-lg"
+      class="w-70 bg-[#151515] p-4 rounded-lg"
     >
-      // Your component go here
+      <div
+        class="space-y-4"
+      >
+        <div
+          class="flex gap-2 items-center "
+        >
+          <div
+            class="text-sm w-25 text-[#AAAAAA]"
+          >
+            Unit
+          </div>
+          <div
+            class="flex bg-[#212121] rounded-lg p-0.5 h-9 w-35"
+          >
+            <label
+              class="rounded-md w-full h-full text-sm flex items-center justify-center cursor-pointer bg-[#424242] text-neutral-100"
+            >
+              <input
+                checked=""
+                class="hidden"
+                name="unit"
+                type="radio"
+                value="PERCENTAGE"
+              />
+              <span>
+                %
+              </span>
+            </label>
+            <label
+              class="rounded-md w-full h-full text-sm flex items-center justify-center cursor-pointer text-neutral-400 hover:text-neutral-200"
+            >
+              <input
+                class="hidden"
+                name="unit"
+                type="radio"
+                value="PIXEL"
+              />
+              <span>
+                px
+              </span>
+            </label>
+          </div>
+        </div>
+        <div
+          class="flex gap-2 items-center"
+        >
+          <div
+            class="text-sm w-25 text-[#AAAAAA]"
+          >
+            Value
+          </div>
+          <div
+            class="flex items-center justify-center rounded-md bg-[#212121]
+        has-[input:hover]:bg-[#424242] has-[input:focus]:border-[#3c67ff] has-[input:focus]:border-1 has-[input:focus]:border-solid h-9 w-35
+      "
+          >
+            <div
+              class="relative"
+            >
+              <button
+                class="h-9 w-9 cursor-pointer rounded-tl-md rounded-bl-md hover:bg-[#424242] disabled:opacity-50 disabled:cursor-not-allowed"
+                data-testid="decrease-btn"
+                disabled=""
+              >
+                -
+              </button>
+            </div>
+            <div
+              class="flex-1 bg-transparent"
+            >
+              <input
+                class="w-full border-none outline-none text-center text-sm"
+                data-testid="number-input"
+                name="number-input"
+                type="text"
+                value="0"
+              />
+            </div>
+            <button
+              class="h-9 w-9 cursor-pointer rounded-tr-md rounded-br-md hover:bg-[#424242] disabled:opacity-50 disabled:cursor-not-allowed"
+              data-testid="increase-btn"
+            >
+              +
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-</DocumentFragment>
+</div>
 `;

@@ -9,6 +9,11 @@ interface InputNumberProps {
   value?: number;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const isNumber = (value: any): value is number => {
+  return typeof value === 'number';
+};
+
 const InputNumber: React.FC<InputNumberProps> = ({
   onChange,
   className,
@@ -37,9 +42,11 @@ const InputNumber: React.FC<InputNumberProps> = ({
     const match = v.match(/-?\d+(\.\d+)?/);
     let num = match && match[0] !== '' ? parseFloat(match[0]) : 0;
 
-    if (isNaN(num) && min) num = min;
-    if (min && num < min) num = min;
-    if (max && num > max && prevValue.current !== null) num = prevValue.current;
+    if (isNaN(num) && isNumber(min)) num = min;
+    if (isNumber(min) && num < min) num = min;
+    if (isNumber(max) && num > max && prevValue.current !== null)
+      num = prevValue.current;
+
     updateValue(num);
   };
 
@@ -53,11 +60,11 @@ const InputNumber: React.FC<InputNumberProps> = ({
     updateValue(numValue - 1);
   };
 
-  const disabledDecrease = min ? numValue <= min : false;
-  const disabledIncrease = max ? numValue >= max : false;
+  const disabledDecrease = isNumber(min) ? numValue <= min : false;
+  const disabledIncrease = isNumber(max) ? numValue >= max : false;
 
   useEffect(() => {
-    if (currentValue) {
+    if (isNumber(currentValue)) {
       updateValue(currentValue);
     }
   }, [currentValue, updateValue]);
@@ -72,6 +79,7 @@ const InputNumber: React.FC<InputNumberProps> = ({
         content={disabledDecrease ? `Value must greater than ${min}` : ''}
       >
         <button
+          data-testid="decrease-btn"
           className="h-9 w-9 cursor-pointer rounded-tl-md rounded-bl-md hover:bg-[#424242] disabled:opacity-50 disabled:cursor-not-allowed"
           onClick={decrease}
           disabled={disabledDecrease}
@@ -83,6 +91,7 @@ const InputNumber: React.FC<InputNumberProps> = ({
         <input
           type="text"
           name="number-input"
+          data-testid="number-input"
           onChange={handleChange}
           onBlur={handleBlur}
           value={value}
@@ -93,6 +102,7 @@ const InputNumber: React.FC<InputNumberProps> = ({
         content={disabledIncrease ? `Value must smaller than ${max}` : ''}
       >
         <button
+          data-testid="increase-btn"
           className="h-9 w-9 cursor-pointer rounded-tr-md rounded-br-md hover:bg-[#424242] disabled:opacity-50 disabled:cursor-not-allowed"
           onClick={increase}
           disabled={disabledIncrease}
